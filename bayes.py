@@ -35,24 +35,56 @@ def calculateP(x,y,z):
    for j in range(y):
       p*= x[2*j]
    return p
+def calculateUP(x,y,z):
+   minmax=list()
+   if len(y)==0:
+      minmax.append(calculateP(x,(len(x)+1)/2,z))
+      minmax.append(calculateP(x,(len(x)+1)/2,z))
+   else:
+      temp=list()
+      l=pow(2,len(y))
+      for i in range(l):
+         for j in range(len(y)):
+            flag=i/pow(2,j)
+            if flag%2==0:
+               flag=0
+            else:
+               flag=1
+            x.append(y[j][flag*2])
+            x.append(y[j][flag*2+1])
+         temp.append(calculateP(x,len(x)/2,z))
+         for j in range(2*len(y)):
+            del x[-1]
+      print(max(temp))
 def calculateq1(x,y):
    outputFile=open('output.txt','w')
    probOfDisease=dict()
    for i in range(len(y)):
       for j in range(len(y[i])):
          counter=0
+         uCounter=0
          findings=list()
+         uFindings=list()
          for k in range(len(y[i][j])):
-            if (y[i][j][k]!='U'):
+            if y[i][j][k]!='U':
                counter+=1
-            if (y[i][j][k]=='T'):
+            if y[i][j][k]=='T':
                findings.append(x[j][2][k])
                findings.append(x[j][3][k])
-            if (y[i][j][k]=='F'):
+            if y[i][j][k]=='F':
                findings.append(1-x[j][2][k])
                findings.append(1-x[j][3][k])
+            if y[i][j][k]=='U':
+               temp=list()
+               temp.append(x[j][2][k])
+               temp.append(x[j][3][k])
+               temp.append(1-x[j][2][k])
+               temp.append(1-x[j][3][k])
+               uFindings.append(temp)
          p=calculateP(findings,counter,x[j][1])
+         p2=calculateUP(findings,uFindings,x[j][1])
          probOfDisease[(x[j][0])]=round(p,4)
+         #print(p2)
       #outputFile.write('Patient-' + str(i+1))
       #outputFile.write(str(probOfDisease)+'\n')
    outputFile.close()
