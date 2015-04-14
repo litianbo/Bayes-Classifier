@@ -55,10 +55,13 @@ def calculateUP(x,y,z):
          temp.append(calculateP(x,len(x)/2,z))
          for j in range(2*len(y)):
             del x[-1]
-      print(max(temp))
+      minmax.append('{0:.4f}'.format(min(temp)))
+      minmax.append('{0:.4f}'.format(max(temp)))
+   return minmax
 def calculateq1(x,y):
    outputFile=open('output.txt','w')
    probOfDisease=dict()
+   minmaxDisease=dict()
    for i in range(len(y)):
       for j in range(len(y[i])):
          counter=0
@@ -83,10 +86,12 @@ def calculateq1(x,y):
                uFindings.append(temp)
          p=calculateP(findings,counter,x[j][1])
          p2=calculateUP(findings,uFindings,x[j][1])
-         probOfDisease[(x[j][0])]=round(p,4)
+         probOfDisease[(x[j][0])]='{0:.4f}'.format(p)
+         minmaxDisease[(x[j][0])]=p2
          #print(p2)
-      #outputFile.write('Patient-' + str(i+1))
-      #outputFile.write(str(probOfDisease)+'\n')
+      outputFile.write('Patient-' + str(i+1)+':\n')
+      outputFile.write(str(probOfDisease)+'\n')
+      outputFile.write(str(minmaxDisease)+'\n')
    outputFile.close()
 """ READ THE INPUT FILE """
 inputFile = open(sys.argv[2])
