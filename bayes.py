@@ -39,8 +39,8 @@ def calculateP(x,y,z):
 def calculateUP(x,y,z):
    minmax=list()
    if len(y)==0:
-      minmax.append(calculateP(x,(len(x)+1)/2,z))
-      minmax.append(calculateP(x,(len(x)+1)/2,z))
+      minmax.append('{0:.4f}'.format(calculateP(x,(len(x)+1)/2,z)))
+      minmax.append('{0:.4f}'.format(calculateP(x,(len(x)+1)/2,z)))
    else:
       temp=list()
       l=pow(2,len(y))
@@ -65,11 +65,11 @@ def calculateq3(x,y,z,findings):
    q1=calculateP(x,len(x)/2,z)
    if len(y)==0:
       temp=list()
-      temp.append("none")
-      temp.append("N")
-      temp.append("none")
-      temp.append("N")
-      q3.append(temp)
+      q3.append("none")
+      q3.append("N")
+      q3.append("none")
+      q3.append("N")
+      return q3
    else:
       temp=list()
       for i in range(2*len(y)):
@@ -93,6 +93,8 @@ def calculateq3(x,y,z,findings):
          else:
             temp3.append('F')
          temp2.append(temp3)
+      temp2.sort(key=lambda x: x[1])
+      
       if max(temp2)[0]<=q1:
          q3.append('none')
          q3.append('N')
@@ -106,6 +108,7 @@ def calculateq3(x,y,z,findings):
       else:
          q3.append(min(temp2)[1])
          q3.append(min(temp2)[2])
+   
    return q3
 def calculateq1(x,y,z):
    fileName=z[:-4]+'_inference.txt'
