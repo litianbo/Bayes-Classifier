@@ -10,12 +10,12 @@ def calculatePDF(x):
    pDF=list()
    pDnotF=list()
    pnotFD=list()
-   for i in range(len(findings)):
-      pF.append(pFD[i]*pD+(1-pD)*pFnotD[i])
-      pDF.append(pFD[i]*pD/pF[i])
-      pnotF=1-pF[i]
-      pDnotF.append((pD-pDF[i]*pF[i])/pnotF)
-      pnotFD.append(1-pFD[i])
+   #for i in range(len(findings)):
+   #   pF.append(pFD[i]*pD+(1-pD)*pFnotD[i])
+   #   pDF.append(pFD[i]*pD/pF[i])
+   #   pnotF=1-pF[i]
+   #   pDnotF.append((pD-pDF[i]*pF[i])/pnotF)
+   #   pnotFD.append(1-pFD[i])
    ml=list()
    ml.append(name)
    #ml.append(num)
